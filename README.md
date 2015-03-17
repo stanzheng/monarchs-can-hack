@@ -6,10 +6,10 @@ Add your class and share your knowledge from class publically.
 
 You will need
 ====
-Node.js https://nodejs.org/
-A web browser
-Git http://github.com
-Editor of choice https://atom.io/
+* Node.js https://nodejs.org/
+* A web browser
+* knowledge of git  https://help.github.com/articles/set-up-git/
+* Editor of choice example https://atom.io/
 
 if you download node you will also have NPM installed, a great site full of useful for libraries for your program https://www.npmjs.com/
 
