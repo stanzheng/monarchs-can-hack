@@ -16,11 +16,13 @@
     numberOfCourses = courseCount();
     $("#courseCount").html(numberOfCourses)
 
+
+    function courseCount() {
+      return $("#courses").children().length;
+    }
+
   });
 
-  function courseCount() {
-    return $("#courses").children().length;
-  }
   </script>
   <body>
     <div class="container" id="main">
