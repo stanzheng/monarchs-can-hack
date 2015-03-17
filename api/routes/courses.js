@@ -1,8 +1,24 @@
 var express = require('express');
 var router = express.Router();
 
-var lazyDatabase = [];
-var id = 0;
+var lazyDatabase = [{
+  "id": 1,
+  "name": "MATH211",
+  "date": "2015-03-17T12:15:16.823Z"
+  },
+  {
+    "id": 2,
+    "name": "CS121",
+    "date": "2015-03-17T12:15:33.395Z"
+  },
+  {
+    "id": 3,
+    "name": "BIO110",
+    "date": "2015-03-17T12:15:56.598Z"
+  }
+];
+
+var id = 3;
 
 /* GET courses listing. */
 router.get('/course', function(req, res, next) {

@@ -12,7 +12,25 @@
   // Wait Until Our Document Loads Before We start running JavaScript on it
   $(document).ready(function(){
 
-    updateCourseCount();
+    getCourses()
+    //updateCourseCount();
+
+
+    // From the Jquery ajax docs
+    function getCourses() {
+      $.ajax({
+        method: "GET",
+        url: "/api/course",
+      }).done(function(response, status ) {
+        console.log(response, status);
+        for (var i = 0; i < response.length; i++) {
+          var course = $("#courseToBeAdded").val();
+          $("#courses").append("<li>"+ response[i].name + "</li>");
+        }
+        updateCourseCount();
+        // Add them to the DOM
+      });
+    }
 
     function updateCourseCount() {
       var numberOfCourses;
@@ -20,6 +38,16 @@
       $("#courseCount").html(numberOfCourses)
     }
 
+    // From the Jquery ajax docs
+    function addCourse(courseName) {
+      $.ajax({
+        method: "POST",
+        url: "/api/course",
+        data: { courseName:  courseName}
+      }).done(function( response, status ) {
+        console.log(response, status);
+      });
+    }
 
     // When Someone clicks the button perform some logic
     // http://api.jquery.com/submit/
@@ -27,8 +55,12 @@
       var course = $("#courseToBeAdded").val();
       $("#courses").append("<li>"+ course + "</li>");
       updateCourseCount();
+
+      // send to server
+      addCourse(course);
       event.preventDefault();
     });
+
 
   });
 
@@ -38,9 +70,6 @@
       <h1> ODU Boards </h1>
       <h4> Number of Classes: <span id="courseCount">3</span></h4>
         <ul id="courses">
-          <li>CS121</lu>
-          <li>BIO121</lu>
-          <li>Math212</li>
         </ul>
         <form class="addCourse" id="addCourse" action="" method="post">
             <input type="text" id="courseToBeAdded" name="course" value="" placeholder=Course>
