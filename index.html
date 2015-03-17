@@ -8,6 +8,19 @@
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
   <script>
+
+  // Wait Until Our Document Loads Before We start running JavaScript on it
+  $(document).ready(function(){
+
+    var numberOfCourses;
+    numberOfCourses = courseCount();
+    $("#courseCount").html(numberOfCourses)
+
+  });
+
+  function courseCount() {
+    return $("#courses").children().length;
+  }
   </script>
   <body>
     <div class="container" id="main">
