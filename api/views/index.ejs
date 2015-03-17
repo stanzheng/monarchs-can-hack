@@ -61,6 +61,26 @@
       event.preventDefault();
     });
 
+    // When someone clicks on a class load it up on the page
+    $(document.body).on("click", "li", function(item) {
+      // Why we have to do this
+      // console.log(item.target)
+
+      var clickedCourse = $(this).text();
+      $.ajax({
+        method: "GET",
+        url: "/api/course/search/"+clickedCourse
+      }).done(function( response, status ) {
+        console.log(response, status);
+
+        // Add Tweeet
+        var discussion = $("#discussion");
+        discussion.html("");
+        for (var message in response.messages) {
+          discussion.append("<div id='message'>" + response.messages[message] + "<div><br/>");
+        }
+      });
+    });
   });
 
   </script>
@@ -74,6 +94,7 @@
             <input type="text" id="courseToBeAdded" name="course" value="" placeholder=Course>
             <input type="submit" name="submit" value="Submit">
         </form>
+      <div id="discussion"></div>
     </div>
   </body>
 </html>
