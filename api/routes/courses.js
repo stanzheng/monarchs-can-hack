@@ -33,7 +33,8 @@ router.get('/course/search/:keyword', function(req, res) {
     _.each(tweets.statuses, function(tweet) {
       messages.push(tweet.user.screen_name + " said " + tweet.text);
     });
-    res.send('twitter', { messages: messages, tweets: tweets});
+    res.json('200', { messages: messages, tweets: tweets});
+    res.end();
   });
 });
 
