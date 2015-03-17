@@ -30,6 +30,7 @@ var id = 3;
 router.get('/course/search/:keyword', function(req, res) {
   var messages = [];
   twit.get("search/tweets", {q:'#'  + req.params.keyword + " #odu"}, function(error, tweets, data) {
+    console.log(error,tweets,data);
     _.each(tweets.statuses, function(tweet) {
       messages.push(tweet.user.screen_name + " said " + tweet.text);
     });
