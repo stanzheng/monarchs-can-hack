@@ -1,6 +1,11 @@
 var express = require('express');
 var router = express.Router();
 
+var twitter = require('twitter');
+var config = require('../config.json');
+var twit = new twitter(config);
+var _ = require('lodash');
+
 var lazyDatabase = [{
   "id": 1,
   "name": "MATH211",
@@ -19,6 +24,18 @@ var lazyDatabase = [{
 ];
 
 var id = 3;
+
+
+// Get what people are saying
+router.get('/course/search/:keyword', function(req, res) {
+  var messages = [];
+  twit.get("search/tweets", {q:'#'  + req.params.keyword + " #odu"}, function(error, tweets, data) {
+    _.each(tweets.statuses, function(tweet) {
+      messages.push(tweet.user.screen_name + " said " + tweet.text);
+    });
+    res.send('twitter', { messages: messages, tweets: tweets});
+  });
+});
 
 /* GET courses listing. */
 router.get('/course', function(req, res, next) {
